@@ -5,3 +5,7 @@
 	then the successive birthday on a non-leap year 
 	is assumed to be on February 28th.
 4.	Other birthdays are assumed as same
+5.  To make the file executable run the following command on git bash
+	chmod +x main.py
+6.  Run the program using the following command
+	./main.py
