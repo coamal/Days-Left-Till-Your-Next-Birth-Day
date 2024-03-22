@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # calculate and display days ramiaining till your next birth day
 # if actual birth day is on a leap year on february 29,
 # then birth day on a non leap year is calculated as if birth day is on February 28th.
@@ -83,7 +85,7 @@ def get_required_year(birth_month, birth_day):
     if birth_month > current_month:
         return current_year
     elif birth_month == current_month and birth_day >= current_day:
-        return current_day
+        return current_year
     else:
         return current_year + 1
 
@@ -96,7 +98,10 @@ def get_days_remaining(birth_month, birth_day, required_year):
     if the required year is not leap and if the birth day occurs on leap year february 29,
     then the days remaining is calculated as if birth day is on February 28th
     '''
-
+    current_month = dt.date.today().month
+    current_day = dt.date.today().day
+    if current_month == birth_month and current_day == birth_day:
+        return 0
     if not is_leap_year(required_year) and birth_day == 29:
         birth_day = birth_day - 1
         birth_month = birth_month
@@ -127,7 +132,10 @@ def main():
 
         choice = input("Do you want to continue? Yes or No: ")
 
-        if choice != "":
+        if choice == "":
+            print('invalid choice!')
+            continue
+        elif choice[0] == 'Y' or choice[0] == 'y':
             birth_month = get_birth_month()
             birth_day = get_birth_day(birth_month)
             required_year = get_required_year(birth_month, birth_day)
@@ -136,9 +144,12 @@ def main():
             print("There are {} days left till your next birth day!".format(days_left))
             continue
 
-        else:
+        elif choice[0] == 'N' or choice[0] == 'n':
             print("Exiting...")
             break
+        else:
+            print("invalid choice!")
+            continue
 
     print("Thank your for using me. Come and visit again! ")
 
